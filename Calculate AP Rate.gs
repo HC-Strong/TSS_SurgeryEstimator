@@ -1,5 +1,5 @@
 // Script written by Hannah Strong <stronghannahc@gmail.com> for James Atkins, March 2017
-// Last edited: September 17, 2018
+// Last edited: December 4, 2018
 
 /**
  * @OnlyCurrentDoc
@@ -21,59 +21,66 @@
 
 
 function calculate_AP_percent(ins, pos, CPT, CPT_above) {
+    var IGS = '61782';   // Set CPT code for Image-Guided Surgery here. Anticipated Payment % for IGS is always 100%, no matter what other codes are selected.
     var output = null ;
-    switch (ins) {
+  
+    if (CPT == IGS) {
+       output = 1;
+       return (output);
+    } else {
+       switch (ins) {
         
-            case '':
-            output = 'Select Ins.';
-            break;
+             case '':
+             output = 'Select Ins.';
+             break;
         
-        case 'Aetna':
-            output = Aetna_Rate(pos);
-            break;
+         case 'Aetna':
+             output = Aetna_Rate(pos);
+             break;
         
-        case 'BCBS':
-            output = BCBS_Rate(pos, CPT, CPT_above);
-            break;
+         case 'BCBS':
+             output = BCBS_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'BCBS BAV':
-            output = BCBS_BAV_Rate(pos, CPT, CPT_above);
-            break;
+         case 'BCBS BAV':
+             output = BCBS_BAV_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'Cigna':
-            output = Cigna_Rate(pos, CPT, CPT_above);
-            break;
+         case 'Cigna':
+             output = Cigna_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'CommFirst':
-            output = CommFirst_Rate(pos, CPT, CPT_above);
-            break;
+         case 'CommFirst':
+             output = CommFirst_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'Humana':
-            output = Humana_Rate(pos);
-            break;
+         case 'Humana':
+             output = Humana_Rate(pos);
+             break;
         
-        case 'Medicare':
-            output = Medicare_Rate(pos, CPT, CPT_above);
-            break;
+         case 'Medicare':
+             output = Medicare_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'MultiPlan':
-            output = MultiPlan_Rate(pos, CPT, CPT_above);
-            break;
+         case 'MultiPlan':
+             output = MultiPlan_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'Oscar':
-            output = Oscar_Rate(pos, CPT, CPT_above);
-            break;
+         case 'Oscar':
+             output = Oscar_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'Tricare':
-            output = Tricare_Rate(pos, CPT, CPT_above);
-            break;
+         case 'Tricare':
+             output = Tricare_Rate(pos, CPT, CPT_above);
+             break;
         
-        case 'UHC':
-            output = UHC_Rate(pos);
-            break;
+         case 'UHC':
+             output = UHC_Rate(pos);
+             break;
         
-        default:
-            output = 'Unrecognized Insurance';
-    }
+         default:
+             output = 'Unrecognized Insurance';
+       }
     return (output);
+    }
 }
